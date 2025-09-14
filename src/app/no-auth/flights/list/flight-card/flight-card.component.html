@@ -1,0 +1,40 @@
+<div class="rounded-lg hover:border hover:border-orange hover:border-solid overflow-hidden grid items-center grid-cols-12 mb-10 h-max cursor-pointer">
+  <img class=" col-span-4 object-cover w-full h-full" [src]="flight.aircraft.image" alt="" />
+  <div class="bg-mb-black col-span-8 h-full p-4 text-white">
+    <div >
+      <article class="flex items-center gap-x-4 text-xl h-max">
+        <article class="flex flex-col items-center mb-3 justify-center gap-x-4 text-xs mx-auto">
+          <p> {{ flight.departureAirport.city }} - {{ flight.departureAirport.name }} - (
+            {{ flight.departureAirport.iata ? flight.departureAirport.iata : "" }} )</p>
+          <img class="my-1" ngSrc="assets/svg/nav.svg" height="17" width="20" />
+          <p>    {{ flight.arrivalAirport.city }} - {{ flight.arrivalAirport.name }} - (
+            {{ flight.arrivalAirport.iata ? flight.arrivalAirport.iata : "" }} )</p>
+        </article> 
+      </article>
+      <article class="flex items-center justify-between gap-x-3 text-orange font-semibold">
+        <p >{{ flight.type }}  <span [hidden]="!(flight.type == 'Exclusivo')">{{ '- ' + (flight.exclusiveType ? flight.exclusiveType : "Confirmado") }}</span></p>
+        <p *ngIf="flight.type == 'Exclusivo'" class="my-1">Valor aproximado de {{ flight.type == 'Exclusivo' ? (flight.totalValue | currency : "BRL") : ( flight.pricePerSeat | currency : "BRL") }}</p>
+        <p *ngIf="flight.type == 'Compartilhado'" class="my-1">{{ flight.type == 'Exclusivo' ? (flight.totalValue | currency : "BRL") : ( flight.pricePerSeat | currency : "BRL") }} por assento </p>
+      </article>
+    </div>
+    <div class="w-full my-5 border border-dashed"></div>
+    <div class="flex items-center justify-between">
+      <article>
+        <p class="text-2xl font-semibold">{{ flight.departureDate.split(" ")[0] }}</p>
+        <p>Data</p>
+      </article>
+      <article>
+        <p class="text-2xl font-semibold">{{ flight.durationText }}</p>
+        <p>Duração</p>
+      </article>
+      <article class="text-center">
+        <p class="text-2xl font-semibold">{{ flight.departureTime }}</p>
+        <p>Hora de partida</p>
+      </article>
+      <article class="text-center">
+        <p class="text-2xl font-semibold">{{  flight.numberOfSeats - flight.purchasedSeats }}</p>
+        <p>Assentos disponíveis</p>
+      </article>
+    </div>
+  </div>
+</div>

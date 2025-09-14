@@ -1,0 +1,80 @@
+<section class="w-11/12 mx-auto mb-10 pt-16">
+  <h1 class="text-3xl text-orange font-bold mb-5">
+    Adicionar lista de passageiros
+  </h1>
+  <form [formGroup]="flightForm" (submit)="sendPayment()">
+    <ng-container formArrayName="passengers">
+      <ng-container
+        *ngFor="let control of passengers.controls; let index = index"
+      >
+        <h2 class="my-3 uppercase text-orange font-medium">
+          Dados do passageiro {{ index + 1 }}
+        </h2>
+        <div [formGroup]="control" class="grid grid-cols-3 gap-x-5">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput formControlName="name" />
+            <mat-error>Campo obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input mask="000.000.000-00" type="text" matInput formControlName="cpf" />
+            <mat-error>Campo obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Data de nascimento</mat-label>
+            <input mask="00/00/0000" [dropSpecialCharacters]="false" type="text" matInput formControlName="birthday" />
+            <mat-error>Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <input
+          type="file"
+          #up
+          accept="image/jpeg, image/png"
+          multiple
+          class="hidden"
+          (change)="addDocument($event, index)"
+        />
+        <ng-container
+          *ngIf="passengers.at(index).get('passengerDocuments').value.length"
+        >
+          <p class="text-orange uppercase transition-all mb-1">documentos</p>
+          <div
+            class="document"
+            *ngFor="
+              let document of passengers.at(index).get('passengerDocuments')
+                .value;
+              let indexDocument = index
+            "
+          >
+            <a
+              matTooltip="Visualizar documento"
+              [href]="document.file"
+              target="_blank"
+              >{{ document.name }}</a
+            >
+            <mat-icon
+              matTooltip="Remover documento"
+              (click)="removeDocument(index, document)"
+              >delete</mat-icon
+            >
+          </div>
+        </ng-container>
+        <p
+          (click)="up.click()"
+          class="hover:text-orange hover:underline hover:cursor-pointer transition-all"
+        >
+          Adicionar documentos
+        </p>
+      </ng-container>
+    </ng-container>
+
+    <button
+      type="submit"
+      [disabled]="flightForm.invalid"
+      class="bg-orange text-white rounded-lg font-bold py-4 w-full mt-3"
+    >
+      Confirmar e ir para pagamento
+    </button>
+  </form>
+</section>

@@ -1,0 +1,12 @@
+aside {
+  background-color: #efefef;
+  min-height: 100vh;
+}
+
+li {
+  @apply py-3 font-bold cursor-pointer;
+}
+
+.active {
+  @apply bg-orange text-white;
+}

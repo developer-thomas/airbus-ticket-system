@@ -1,0 +1,139 @@
+<h4 class="text-2xl font-bold">Carga</h4>
+<form [formGroup]="loadForm" class="pb-10 pr-10" (submit)="submit()">
+  <h4 class="text-lg font-bold my-2">Imagem</h4>
+  <section class="flex items-start gap-10">
+    <div class="flex items-center gap-5 w-2/4">
+      <input
+        type="file"
+        accept="image/*"
+        class="hidden"
+        #inputUpload
+        (change)="uploadFile($event)"
+      />
+      <div class="grid grid-cols-2 gap-x-3 items-start">
+        <mat-form-field class="no-padding" appearance="outline">
+          <mat-label>Adicione uma imagem do objeto</mat-label>
+          <input type="text" readonly (click)="inputUpload.click()" matInput />
+        </mat-form-field>
+        <button
+          (click)="inputUpload.click()"
+          type="button"
+          class="bg-mb-black-200 text-white rounded-lg font-bold p-4"
+        >
+          Upload
+        </button>
+      </div>
+    </div>
+    <img
+      *ngIf="image"
+      class="max-h-60 mb-5 object-cover rounded"
+      [src]="image"
+      alt=""
+    />
+  </section>
+
+  <section class="grid grid-cols-2 gap-3">
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input type="text" formControlName="name" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Tamanho</mat-label>
+      <input type="text" placeholder="00x00" formControlName="size" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Quantidade</mat-label>
+      <input type="text" formControlName="amountLuggage" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Peso do pacote</mat-label>
+      <input type="text" formControlName="weightPackage" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Peso total</mat-label>
+      <input type="text" formControlName="wightTotal" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Tempo estimado</mat-label>
+      <input type="text" formControlName="estimatedTime" matInput />
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="no-padding" appearance="outline">
+      <mat-label>Selecione o conteúdo</mat-label>
+      <mat-select formControlName="contentType">
+        <mat-option value="Frágil">Frágil</mat-option>
+        <mat-option value="Perigosa">Perigosa</mat-option>
+        <mat-option value="Perecível">Perecível</mat-option>
+        <mat-option value="Viva">Viva</mat-option>
+        <mat-option value="Valiosa">Valiosa</mat-option>
+        <mat-option value="Controlada">Controlada</mat-option>
+      </mat-select>
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="no-padding col-span-2" appearance="outline">
+      <mat-label>Selecione a viagem</mat-label>
+      <mat-select formControlName="flightId">
+        <mat-option *ngFor="let flight of flights$ | async" [value]="flight.id">
+          <p class="flex items-center gap-x-1">
+            ({{ flight.departureAirport.name }} -
+            {{ flight.departureAirport.city }})
+            <mat-icon>arrow_forward</mat-icon> (
+            {{ flight.arrivalAirport.name }} -
+            {{ flight.arrivalAirport.city }} )
+          </p>
+        </mat-option>
+      </mat-select>
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="no-padding col-span-2" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <textarea
+        formControlName="description"
+        placeholder="Descreva seu produto"
+        matInput
+        cols="30"
+        rows="10"
+      ></textarea>
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="no-padding col-span-2" appearance="outline">
+      <mat-label>Notas adicionais</mat-label>
+      <textarea
+        formControlName="additionalNotes"
+        placeholder="Descreva seu produto"
+        matInput
+        cols="30"
+        rows="10"
+      ></textarea>
+      <mat-error class="text-xs">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </section>
+
+  <div class="flex justify-end gap-5 mt-5">
+    <button
+      (click)="location.back()"
+      type="button"
+      class="bg-mb-black-200 text-white rounded-lg w-1/5 font-bold p-4"
+    >
+      Cancelar
+    </button>
+
+    <button
+      [disabled]="loadForm.invalid"
+      type="submit"
+      class="btn bg-mb-black-200 text-white rounded-lg w-1/5 font-bold p-4"
+    >
+      Salvar
+    </button>
+  </div>
+</form>

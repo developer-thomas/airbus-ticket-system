@@ -1,0 +1,61 @@
+Item 11 da planilha: ontem foi nos dito que fora resolvido. Não fora. Continua apresentando horário de meia noite -( RESOLVIDO) 
+
+-Item 1 da planilha: Não resolvido. Não permite atualização de endereço e o botão continua como finalizar. Na reunião foi nos dito que havia sido resolvido
+-(RESOLVIDO) 
+
+-Item 2 da planilha: "No perfil “Quero ser Passageiro” Minhas Cargas” existem três campos referentes
+a “Cargas”: “Todos”; “Prontas para entrega " e "Entregues " sem funções associadas a elas no ambiente.
+Ações necessárias: Devem ser excluídas, permanecendo apenas “Cargas” e Solicitar Transporte de Carga”"
+-Não foi realizada as modificações. Continua apresentando: "Todos", "Prontas para entrega" e "Entregues"
+-(RESOLVIDO)
+
+-Item 3 da Planilha: "Ainda no Perfil do “Quero ser Passageiro” dentro de “Minhas Cargas”. Em
+03/09/2024 solicitamos que fossem inseridos campos adicionais. Continuam sem
+tais campos. Os campos que existem não estão adequados.
+Ações necessárias: Corrigir e inserir os campos de acordo com esta sequência:
+1) Cidade de Origem - VIAGEM?
+2) Aeroporto de Decolagem - VIAGEM?
+3) Cidade de Destino - VIAGEM?
+4) Aeroporto de Pouso - VIAGEM?
+5) Horário Estimado necessário para o Transporte - ADICIONADO
+6) Descrição da Carga - ADICIONADO
+7) Quantidade de Embalagens - ADICIONADO
+8) Volume por Embalagem (largura x comprimento x altura) - ADICIONADO (TAMANHO)
+9) Peso por Embalagem - ADICIONADO (PESO DO PACOTE)
+10) Peso Total - ADICIONADO
+11) Selecione o conteúdo (Frágil, Perigosa, Perecível, Viva, Controlada) - ADICIONADO
+12) Observações adicionais - ADICIONADO
+
+(PARCIALMENTE RESOLVIDO, PRECISO SABER SE A SELAÇÃO DA VIAGEM ENGLOBA A CIDADE ORIGEM, AEROPORTO DE DECOLAGEM, CIDADE DE DESTINO E AEROPORTO DE POUSO) 
+
+-Item 4 da planilha: "Ainda no mesmo tópico anterior, “Quero ser passageiro - Minhas Cargas” ao
+tentar “Salvar” o formulário para que seja recebido pela MobAir, a mensagem que
+aparece é “Erro durante o pagamento”. Este formulário é um formulário destinado
+à mobAIR para pesquisa de empresas disponíveis para o transporte da carga aérea.
+Logo, esta mensagem não se aplica.
+Ação necessária: A mensagem que deve aparecer é: “Realizaremos a sua cotação
+e em breve retornaremos. Obrigado”."
+(RESOLVIDO)
+
+-Item 6 da planilha (pdf): "Dentro do gerencial da empresa, na parte de “Cargas”, os campos não estão de
+acordo com a necessidade comercial.
+Ação necessária: Os campos devem ser:
+1) Cidade de Origem
+2) Aeroporto de Decolagem
+3) Cidade de Destino
+4) Aeroporto de Pouso
+5) Horário Estimado de Decolagem
+6) Volume Máximo para Transporte
+7) Peso Máximo para Transporte
+8) Observações Adicionais".
+( QUE TELA É ESSA?)
+
+-A parte de cadastramento de oferta de voos (exclusivo um trecho e de assentos) também não funciona mais. Não é possível selecionar a cidade de origem e consequentemente o(s) aeroporto(s) não aparece(m) 
+( QUE TELA É ESSA?)
+
+-Ainda...dentro do gerencial da empresa....em "Aeronaves" não é possível estabelecer o aeroporto sendo a "Base da aeronave"
+-Parece que se perderam todas as vinculações  dos aeroportos com a cidade e base de aeronave
+( QUE TELA É ESSA?)
+
+adm@dstaxiaereo.com.br
+mobair_empresas_2024

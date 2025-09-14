@@ -1,0 +1,37 @@
+<article class="flex items-center justify-between my-3 px-5">
+  <h1 class="text-2xl font-extrabold">Cargas</h1>
+  <button routerLink="/plataforma/objetos/novo/adicionar-objeto" class="bg-mb-black-200 text-white rounded-lg font-bold py-4 w-1/4">
+    Solicitar Transporte de Carga
+  </button>
+</article>
+<nav>
+  <ul class="flex items-center gap-x-4 my-5">
+    <li [ngClass]="{ selected: tab.selected }" class="cursor-pointer" (click)="tabFilter(tab.key)" *ngFor="let tab of tabs">
+      {{ tab.title }}
+    </li>
+  </ul>
+</nav>
+<section>
+  <div
+    *ngFor="let order of orders"
+    [routerLink]="['/plataforma/objetos', order.id]"
+    class="box hover:border hover:border-solid hover:border-orange cursor-pointer mb-9 w-11/12 flex items-center gap-x-4"
+  >
+    <img class="w-28 h-28 rounded-full object-cover p-5" [src]="order.luggages[0].image" alt=""
+    />
+    <div>
+      <article>
+        <p class="text-lg font-bold">
+          <span>{{ order.luggages[0].name }}</span>
+        </p>
+      </article>
+      <p class="text-lg font-bold flex items-center gap-x-2">
+        <span>{{ order.flight.departureAirport.city }}</span>
+        <mat-icon>arrow_forward</mat-icon>
+        <span>{{ order.flight.arrivalAirport.city }}</span>
+      </p>
+    </div>
+  </div>
+</section>
+<mat-paginator [pageSizeOptions]="[10, 25, 100]" (page)="pagination($event)">
+</mat-paginator>

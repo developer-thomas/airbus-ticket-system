@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.1" height="137.011" viewBox="0 0 25.1 137.011">
+  <g id="Grupo_27885" data-name="Grupo 27885" transform="translate(-180.335 -911.058)">
+    <ellipse id="Elipse_447" data-name="Elipse 447" cx="4.5" cy="4.5" rx="4.5" ry="4.5" transform="translate(187.89 911.058)" fill="#ff6b00"/>
+    <ellipse id="Elipse_448" data-name="Elipse 448" cx="4.5" cy="4.5" rx="4.5" ry="4.5" transform="translate(187.963 1039.068)" fill="#ff6b00"/>
+    <line id="Linha_16" data-name="Linha 16" x2="129.238" transform="translate(192.871 912.265) rotate(90)" fill="none" stroke="#ff6b00" stroke-width="1" stroke-dasharray="5" opacity="0.413"/>
+    <g id="Grupo_3598" data-name="Grupo 3598" transform="translate(205.46 975.406) rotate(135)">
+      <path id="Caminho_11556" data-name="Caminho 11556" d="M2.939,13.58s-.334.92,0,1.2c0,0,.167.251,1.115,0L5.894,17.76a1.059,1.059,0,0,0,.641-.7L6.4,13.329,10.1,9.706l4.6,7.135s.207.267.615-.023a.81.81,0,0,0,.26-.992L13.5,6.248l3.423-3.423s1.35-1.79.565-2.669c0,0-1.193-.722-2.983.942L11.431,4.112,1.445,2.071a.721.721,0,0,0-.722.816l7.285,4.7L4.36,11.218.566,11.177s-.6.283-.565.628Z" transform="translate(0.017 0.017)" fill="#ff6b00"/>
+    </g>
+  </g>
+</svg>

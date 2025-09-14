@@ -1,0 +1,7 @@
+.document {
+  @apply border border-orange border-solid rounded mb-2 p-2;
+  @apply flex items-center justify-between;
+  a {
+    @apply cursor-pointer hover:text-orange hover:underline;
+  }
+}

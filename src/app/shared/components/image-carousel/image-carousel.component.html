@@ -1,0 +1,5 @@
+<section class="relative w-full flex items-center justify-between cursor-pointer">
+  <mat-icon (click)="previousImage()" class="absolute left-0">chevron_left</mat-icon>
+  <img (click)="openImage()" [src]="currentImage" alt="" class="w-full object-cover h-48">
+  <mat-icon (click)="nextImage()" class="absolute right-0">chevron_right</mat-icon>
+</section>

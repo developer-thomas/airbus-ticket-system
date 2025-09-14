@@ -1,0 +1,16 @@
+.input-search {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.transfer {
+  background-color: #d0d0d0;
+  @apply w-8 h-8  rounded-full flex items-center justify-center cursor-pointer;
+}
+
+.airport {
+  @apply p-2 rounded transition-colors hover:bg-orange/60 cursor-pointer;
+}
+
+.filter-selected {
+  @apply bg-black text-orange;
+}

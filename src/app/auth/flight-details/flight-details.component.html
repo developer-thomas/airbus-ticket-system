@@ -1,0 +1,142 @@
+<section class="pb-10">
+  <img
+    class="w-full object-cover h-96"
+    [src]="order?.flight.aircraft.image"
+    alt=""
+  />
+
+  <div class="w-11/12 mx-auto">
+    <h2 class="text-3xl font-semibold my-10">Detalhes do voo</h2>
+
+    <h4 class="text-2xl font-bold text-orange mb-5">
+      Assentos reservados : {{ order.amountPeople }}
+    </h4>
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <h4 class="text-2xl font-bold text-orange mb-5">Itinerário do voo</h4>
+        <div class="font-medium text-lg flex gap-x-2 mb-5">
+          <img ngSrc="assets/svg/calendar.svg" height="20" width="20" />
+          <p>{{ order?.flight.date }}, às {{ order?.flight.departureTime }}</p>
+        </div>
+        <div class="flex items-start">
+          <img ngSrc="assets/svg/timeline.svg" height="80" width="80" />
+          <div>
+            <article class="mb-8">
+              <p class="font-bold text-lg text-orange">
+                {{ order?.flight.departureTime }}
+              </p>
+              <p class="font-bold">
+                {{ order?.flight.departureAirport.iata }},
+                {{ order?.flight.departureAirport.icao }}
+              </p>
+              <p>
+                {{ order?.flight.departureAirport.name }} -
+                {{ order?.flight.departureAirport.city }}
+              </p>
+            </article>
+            <article>
+              <p class="font-bold text-lg text-orange">
+                {{ order?.flight.arrivalTime }}
+              </p>
+              <p class="font-bold">
+                {{ order?.flight.arrivalAirport.iata }},
+                {{ order?.flight.arrivalAirport.icao }}
+              </p>
+              <p>
+                {{ order?.flight.arrivalAirport.name }} -
+                {{ order?.flight.arrivalAirport.city }}
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-2xl font-bold text-orange mb-5">
+          Detalhes da aeronave
+        </h4>
+        <div class="flex items-center gap-3 text-lg font-medium">
+          <img ngSrc="assets/svg/nav-orange.svg" height="80" width="50" />
+          <div>
+            <p class="font-bold text-orange">
+              {{ order?.flight.aircraft.model }}
+            </p>
+            <p>
+              {{ order?.flight.aircraft.manufacturer }} -
+              {{ order?.flight.aircraft.numberOfSeats }} assentos
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2">
+        <h4 class="text-2xl font-bold text-orange">Informações secundárias</h4>
+
+        <div class="flex gap-x-4">
+          <div class="flex items-start gap-x-4">
+            <img ngSrc="assets/svg/embarque.svg" height="80" width="50" />
+            <article>
+              <h5 class="text-lg font-bold text-mb-black-200">
+                Instruções de embarque
+              </h5>
+              <p>
+                {{ order?.flight.departureAirport.city }},{{
+                  order?.flight.departureAirport.country
+                }}
+              </p>
+              <a
+                [href]="order?.flight.departureLink"
+                target="_blank"
+                class="mt-4"
+              >
+                <button
+                  class="bg-mb-black-200 text-white rounded-lg font-bold py-4 w-48 mt-3"
+                  (click)="
+                    openGoogleMaps(
+                      order?.flight.departureAirport.googleMapsUrl ||
+                        'https://www.google.com/maps/search/?api=1&query=' +
+                          order.flight.departureAirport.lat +
+                          ',' +
+                          order.flight.departureAirport.lng
+                    );
+                    $event.stopPropagation()
+                  "
+                >
+                  Localização
+                </button>
+              </a>
+            </article>
+          </div>
+          <div class="flex items-start gap-x-4">
+            <img ngSrc="assets/svg/desembarque.svg" height="80" width="50" />
+            <article>
+              <h5 class="text-lg font-bold text-mb-black-200">
+                Instruções de desembarque
+              </h5>
+              <p>
+                {{ order?.flight.arrivalAirport.city }},{{
+                  order?.flight.arrivalAirport.country
+                }}
+              </p>
+              <a [href]="order?.flight.arrivalLink" target="_blank">
+                <button
+                  class="bg-mb-black-200 text-white rounded-lg font-bold py-4 w-48 mt-3"
+                  (click)="
+                    openGoogleMaps(
+                      order?.flight.arrivalAirport.googleMapsUrl ||
+                        'https://www.google.com/maps/search/?api=1&query=' +
+                          order.flight.arrivalAirport.lat +
+                          ',' +
+                          order.flight.arrivalAirport.lng
+                    );
+                    $event.stopPropagation()
+                  "
+                >
+                  > Localização
+                </button>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+@use "@angular/material" as mat;
+@include mat.core();
+$mobair_lp-primary: mat.define-palette(mat.$orange-palette, 900);
+$mobair_lp-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$mobair_lp-warn: mat.define-palette(mat.$red-palette);
+$mobair_lp-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $mobair_lp-primary,
+      accent: $mobair_lp-accent,
+      warn: $mobair_lp-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($mobair_lp-theme);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body:not(.mat-icon) {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.layout-wrapper {
+  width: 80vw;
+  margin: 0 auto;
+}
+*:not(p, li, article, section),
+::before,
+::after {
+  border-style: none;
+}

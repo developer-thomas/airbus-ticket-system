@@ -1,0 +1,136 @@
+<form
+  class="grid grid-cols-1 text-center p-5"
+  [formGroup]="solicitationForm"
+  (submit)="sendSolicitation()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Quantidade de volumes</mat-label>
+    <input type="number" matInput formControlName="quantity" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label
+      >Dimensões de cada volume (ALTURA, LARGURA, COMPRIMENTO)</mat-label
+    >
+    <textarea
+      matInput
+      placeholder="Descreva as dimensões de cada volume"
+      rows="3"
+      formControlName="dimensions"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Peso total dos volumes</mat-label>
+    <textarea
+      matInput
+      placeholder="Descreva o peso total dos volumes"
+      rows="3"
+      formControlName="approximateWeight"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Peso total aproximado de cada volume</mat-label>
+    <textarea
+      matInput
+      placeholder="Descreva o peso total aproximado de cada volume"
+      rows="3"
+      formControlName="approximateTotalWeight"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descrição de cada volume</mat-label>
+    <textarea
+      matInput
+      placeholder="Descreva a descrição de cada volume"
+      rows="3"
+      formControlName="description"
+    ></textarea>
+  </mat-form-field>
+
+  <app-city-auto-complete
+    [cityFilter]="departureCityFilter"
+    (handleSelectCity)="filterAirportsByCity($event, 'departure')"
+    [cities]="cities"
+    title="Cidade de origem"
+  ></app-city-auto-complete>
+  <mat-form-field appearance="outline" class="no-padding w-full">
+    <mat-label>Aeroporto de decolagem</mat-label>
+    <mat-select formControlName="departureAirport">
+      <mat-option *ngFor="let airport of departureAirports" [value]="airport.name"
+        >{{ airport.name }} - <span class="uppercase">( {{(airport?.iata ? airport?.iata + ' ,': '') }} {{ airport?.icao || '' }} )</span>
+        </mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <app-city-auto-complete
+    [cityFilter]="arrivalCityFilter"
+    (handleSelectCity)="filterAirportsByCity($event, 'arrival')"
+    [cities]="cities"
+    title="Cidade de destino"
+  ></app-city-auto-complete>
+  <mat-form-field appearance="outline" class="no-padding w-full">
+    <mat-label>Aeroporto de pouso</mat-label>
+    <mat-select formControlName="arrivalAirport">
+      <mat-option *ngFor="let airport of arrivalAirports" [value]="airport.name"
+        >{{ airport.name }} - <span class="uppercase">( {{(airport?.iata ? airport?.iata + ' ,': '') }} {{ airport?.icao || '' }} )</span>
+        </mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  
+  <!-- <app-input
+    label="Horário - saída"
+    mask="Hh:m0"
+    suffix=" Hrs"
+    controlName="departureTime"
+    [formGroup]="flightForm"
+  ></app-input> -->
+  <mat-form-field class="no-padding w-full" appearance="outline">
+    <mat-label>Horário</mat-label>
+    <input currencyMask mask="Hh:m0" matInput formControlName="departureTime" [dropSpecialCharacters]="false"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Data</mat-label>
+    <input formControlName="departureDate" type="date" matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Observações adicionais</mat-label>
+    <textarea
+      matInput
+      placeholder="Descreva informações adicionais que julgue importante no transporte da sua carga"
+      rows="3"
+      formControlName="observation"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input type="text" matInput formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Whatsapp</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="phone"
+      mask="(00) 0 0000-0000"
+    />
+  </mat-form-field>
+
+  <div class="flex items-center gap-5">
+    <button
+      class="w-full"
+      mat-flat-button
+      color="primary"
+    >
+      Realizar cotação
+    </button>
+  </div>
+</form>

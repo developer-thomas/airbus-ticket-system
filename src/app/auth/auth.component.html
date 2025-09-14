@@ -1,0 +1,17 @@
+<app-header [isBlack]="true"></app-header>
+<section class="grid grid-cols-12 gap-x-12">
+  <aside class="col-span-2">
+    <nav>
+      <ul class="text-center">
+        <li routerLinkActive="active" [routerLink]="['/plataforma/viagens']">Minhas Viagens</li>
+        <li routerLinkActive="active" [routerLink]="['/plataforma/solicitacoes']">Minhas Solicitações</li>
+        <!-- <li routerLinkActive="active" [routerLink]="['/plataforma/objetos']">Minhas Cargas</li> -->
+        <li routerLinkActive="active" [routerLink]="['/plataforma/perfil']">Meu Perfil</li>
+        <li (click)="logout()">Sair</li>
+      </ul>
+    </nav>
+  </aside>
+  <main class="col-span-10 mt-20">
+    <router-outlet></router-outlet>
+  </main>
+</section>

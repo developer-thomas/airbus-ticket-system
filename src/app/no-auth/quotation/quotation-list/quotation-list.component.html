@@ -1,0 +1,20 @@
+<section>
+  <div class="layout-wrapper h-full">
+    <div class="w-2/3 mt-10 mx-auto">
+      <app-select-airports
+        [showFilters]="false"
+        [departureId]="departureId"
+        [arrivalId]="arrivalId"
+        [date]="date"
+        [hour]="hour"
+        (handleSelectAirports)="getQuotations($event)"
+      ></app-select-airports>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 p-4 mt-9">
+    <app-quotation-card *ngFor="let quotation of quotations; let idx=index" (click)="goToQuotationDetail(quotation.id)"
+      [quotation]="quotation"
+    ></app-quotation-card>
+  </div>
+  <h2 class="text-center font-bold" *ngIf="quotations.length === 0">Nenhum resultado encontrado</h2>
+</section>

@@ -1,0 +1,36 @@
+<header
+  class="py-5"
+  [ngClass]="{
+    'bg-black text-white': isBlack
+  }"
+>
+  <div
+    [ngClass]="{
+      'layout-wrapper': isBlack
+    }"
+    class="flex items-center justify-between"
+  >
+    <img src="assets/svg/logotipo.svg" routerLink="/" class="cursor-pointer" alt="" />
+    <!-- <nav>
+      <ul class="flex items-center gap-x-10 text-lg font-bold">
+        <li  routerLink="/">Home</li>
+        <li routerLink="/viagens">Viagens</li>
+      </ul>
+    </nav> -->
+    <div class="flex items-center gap-x-5" >
+      <button *ngIf="!(user$ | async)"
+        routerLink="/auth/cadastro"
+        class="border border-solid border-orange hover:bg-orange transition-colors rounded-lg py-4 w-48 font-medium"
+      >
+        Cadastre-se
+      </button>
+      <button *ngIf="!(user$ | async)" routerLink="/auth" class="bg-orange rounded-lg py-4 w-48 font-medium">Entrar</button>
+      <div *ngIf="(user$ | async)"
+      routerLink="/plataforma/perfil"
+        class="w-14 h-14 bg-white rounded-full flex items-center justify-center cursor-pointer"
+      >
+        <img ngSrc="assets/svg/user.svg" height="18" width="18" alt="" />
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,45 @@
+<h1 class="text-2xl font-extrabold">Solicitações</h1>
+<nav>
+  <ul class="flex items-center gap-x-4 my-5">
+    <li
+      [ngClass]="{
+        selected: tab.selected
+      }"
+      class="cursor-pointer"
+      (click)="tabFilter(tab.key)"
+      *ngFor="let tab of tabs"
+    >
+      {{ tab.title }}
+    </li>
+  </ul>
+</nav>
+<section>
+  <div
+    [routerLink]="['/plataforma/solicitacoes', solicitation.id]"
+    *ngFor="let solicitation of solicitations"
+    class="box hover:border hover:border-solid hover:border-orange cursor-pointer mb-9 w-11/12 flex items-center rounded-md gap-x-4"
+  >
+    <img
+      class="w-28 h-28 rounded-full object-cover p-5"
+      [src]="solicitation.aircraft.image"
+      alt=""
+    />
+    <div>
+      <article>
+        <p class="text-lg font-bold flex items-center gap-x-2">
+          <span>{{ solicitation.departureAirport.city }}</span>
+          <mat-icon>arrow_forward</mat-icon>
+          <span>{{ solicitation.arrivalAirport.city }}</span>
+        </p>
+      </article>
+      <p class="text-lg flex items-center gap-x-2">
+        {{ solicitation.aircraft.model }}
+      </p>
+      <p class="text-lg flex items-center gap-x-2">
+        {{ solicitation.date }}
+      </p>
+    </div>
+  </div>
+</section>
+<mat-paginator [pageSizeOptions]="[10, 25, 100]" (page)="pagination($event)">
+</mat-paginator>

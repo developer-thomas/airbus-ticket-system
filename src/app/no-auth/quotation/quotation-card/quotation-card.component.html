@@ -1,0 +1,87 @@
+<div
+  class="rounded-lg overflow-hidden cursor-pointer hover:border hover:border-orange hover:border-solid"
+>
+  <img
+    class="h-24 object-cover w-full"
+    [src]="quotation.image"
+    alt=""
+  />
+  <div class="bg-mb-black p-4 text-white">
+    <div>
+      <article
+        class="flex flex-col items-center justify-center text-center gap-x-4 text-xs"
+      >
+        <p>
+          {{ quotation.departureAirport.city }} -
+          {{ quotation.departureAirport.name }} - (
+          {{
+            quotation.departureAirport.iata
+              ? quotation.departureAirport.iata
+              : ""
+          }}
+          )
+        </p>
+        <img
+          class="my-1"
+          src="assets/svg/nav.svg"
+          height="20"
+          width="17"
+        />
+        <p>
+          {{ quotation.arrivalAirport.city }} -
+          {{ quotation.arrivalAirport.name }} - (
+          {{
+            quotation.arrivalAirport.iata ? quotation.arrivalAirport.iata : ""
+          }}
+          )
+        </p>
+      </article>
+      <!-- <article
+        class="flex items-center justify-between gap-x-3 text-orange font-semibold"
+      >
+        <p>
+          {{ quotation.type }}
+          <span [hidden]="!(quotation.type == 'Exclusivo')">{{
+            "- " +
+              (quotation.exclusiveType ? quotation.exclusiveType : "Confirmado")
+          }}</span>
+        </p>
+        <p *ngIf="quotation.type == 'Exclusivo'" class="my-1">
+          Valor aproximado de
+          {{
+            quotation.type == "Exclusivo"
+              ? (quotation.totalValue | currency : "BRL")
+              : (quotation.pricePerSeat | currency : "BRL")
+          }}
+        </p>
+        <p *ngIf="quotation.type == 'Compartilhado'" class="my-1">
+          {{
+            quotation.type == "Exclusivo"
+              ? (quotation.totalValue | currency : "BRL")
+              : (quotation.pricePerSeat | currency : "BRL")
+          }}
+          por assento
+        </p>
+      </article> -->
+    </div>
+    <div class="w-full my-2 border border-dashed"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <article *ngIf="quotation.departureDate" class="text-center">
+        <p>Data</p>
+        <p>{{ quotation.departureDate | date: 'dd/MM/yyyy':'UTC' }}</p>
+      </article>
+      <article *ngIf="quotation.departureTime" class="text-center">
+        <p>Hora de partida</p>
+        <p>{{ quotation.departureTime }}</p>
+      </article>
+      <article class="text-center">
+        <p>Duração</p>
+        <p>{{ quotation.duration }}</p>
+      </article>
+      <article class="text-center">
+        <p>Valor aproximado</p>
+        <p>{{ quotation.quotation | currency: 'BRL' }}</p>
+      </article>
+    </div>
+  </div>
+</div>

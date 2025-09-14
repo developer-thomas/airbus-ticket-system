@@ -1,0 +1,240 @@
+<section>
+  <div class="layout-wrapper h-full">
+    <div class="w-2/3 mt-10 mx-auto">
+      <app-select-airports
+        (handleSelectAirports)="filterByAirports($event)"
+      ></app-select-airports>
+    </div>
+  </div>
+</section>
+
+<section class="mt-14">
+  <div class="layout-wrapper">
+    <div>
+      <article class="flex items-center gap-4">
+        <h2 class="text-2xl font-semibold">
+          Voos compartilhados
+          <span class="text-base">(venda de assentos)</span>
+        </h2>
+        <p
+          class="font-semibold text-orange cursor-pointer"
+          routerLink="/viagens"
+        >
+          Ver todos
+        </p>
+      </article>
+    </div>
+    <div
+      class="grid grid-cols-2 gap-5 my-5"
+      *ngIf="sharedFlights.length; else noData"
+    >
+      <div
+        *ngFor="let flight of sharedFlights"
+        class="rounded-lg overflow-hidden cursor-pointer hover:border hover:border-orange hover:border-solid"
+        (click)="goToFlight(flight)"
+      >
+        <img
+          class="h-24 object-cover w-full"
+          [src]="flight.aircraft.image"
+          alt=""
+        />
+        <div class="bg-mb-black p-4 text-white">
+          <div>
+            <article
+              class="flex flex-col items-center justify-center text-center gap-x-4 text-xs"
+            >
+              <p>
+                {{ flight.departureAirport.city }} -
+                {{ flight.departureAirport.name }} - (
+                {{
+                  flight.departureAirport.iata
+                    ? flight.departureAirport.iata
+                    : ""
+                }}
+                )
+              </p>
+              <img
+                class="my-1"
+                ngSrc="assets/svg/nav.svg"
+                height="20"
+                width="17"
+              />
+              <p>
+                {{ flight.arrivalAirport.city }} -
+                {{ flight.arrivalAirport.name }} - (
+                {{
+                  flight.arrivalAirport.iata ? flight.arrivalAirport.iata : ""
+                }}
+                )
+              </p>
+            </article>
+            <article
+              class="flex items-center justify-between gap-x-3 text-orange font-semibold"
+            >
+              <p>
+                {{ flight.type }}
+                <span [hidden]="!(flight.type == 'Exclusivo')">{{
+                  "- " +
+                    (flight.exclusiveType ? flight.exclusiveType : "Confirmado")
+                }}</span>
+              </p>
+              <p *ngIf="flight.type == 'Exclusivo'" class="my-1">
+                Valor aproximado de
+                {{
+                  flight.type == "Exclusivo"
+                    ? (flight.totalValue | currency : "BRL")
+                    : (flight.pricePerSeat | currency : "BRL")
+                }}
+              </p>
+              <p *ngIf="flight.type == 'Compartilhado'" class="my-1">
+                {{
+                  flight.type == "Exclusivo"
+                    ? (flight.totalValue | currency : "BRL")
+                    : (flight.pricePerSeat | currency : "BRL")
+                }}
+                por assento
+              </p>
+            </article>
+          </div>
+          <div class="w-full my-2 border border-dashed"></div>
+          <div class="flex items-center justify-between">
+            <article>
+              <p>{{ flight.departureDate.split(" ")[0] }}</p>
+              <p>Data</p>
+            </article>
+            <article>
+              <p>{{ flight.durationText }}</p>
+              <p>Duração</p>
+            </article>
+            <article class="text-center">
+              <p>{{ flight.departureTime }}</p>
+              <p>Hora de partida</p>
+            </article>
+            <article class="text-center">
+              <p>{{ flight.numberOfSeats - flight.purchasedSeats }}</p>
+              <p>Assentos disponíveis</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mt-14">
+  <div class="layout-wrapper">
+    <div>
+      <article class="flex items-center gap-4">
+        <h2 class="text-2xl font-semibold">
+          Voos exclusivos <span class="text-base">(apenas um trecho)</span>
+        </h2>
+        <p
+          class="font-semibold text-orange cursor-pointer"
+          routerLink="/viagens"
+        >
+          Ver todos
+        </p>
+      </article>
+    </div>
+    <div
+      class="grid grid-cols-2 gap-5 my-5"
+      *ngIf="exclusiveFlights.length; else noData"
+    >
+      <div
+        *ngFor="let flight of exclusiveFlights"
+        class="rounded-lg overflow-hidden cursor-pointer hover:border hover:border-orange hover:border-solid"
+        (click)="goToFlight(flight)"
+      >
+        <img
+          class="h-24 object-cover w-full"
+          [src]="flight.aircraft.image"
+          alt=""
+        />
+        <div class="bg-mb-black p-4 text-white">
+          <div>
+            <article
+              class="flex flex-col items-center justify-center text-center gap-x-4 text-xs"
+            >
+              <p>
+                {{ flight.departureAirport.city }} -
+                {{ flight.departureAirport.name }} - (
+                {{
+                  flight.departureAirport.iata
+                    ? flight.departureAirport.iata
+                    : ""
+                }}
+                )
+              </p>
+              <img
+                class="my-1"
+                ngSrc="assets/svg/nav.svg"
+                height="20"
+                width="17"
+              />
+              <p>
+                {{ flight.arrivalAirport.city }} -
+                {{ flight.arrivalAirport.name }} - (
+                {{
+                  flight.arrivalAirport.iata ? flight.arrivalAirport.iata : ""
+                }}
+                )
+              </p>
+            </article>
+            <article
+              class="flex items-center justify-between gap-x-3 text-orange font-semibold"
+            >
+              <p>
+                {{ flight.type }}
+                <span [hidden]="!(flight.type == 'Exclusivo')">{{
+                  "- " +
+                    (flight.exclusiveType ? flight.exclusiveType : "Confirmado")
+                }}</span>
+              </p>
+              <p *ngIf="flight.type == 'Exclusivo'" class="my-1">
+                Valor aproximado de
+                {{
+                  flight.type == "Exclusivo"
+                    ? (flight.totalValue | currency : "BRL")
+                    : (flight.pricePerSeat | currency : "BRL")
+                }}
+              </p>
+              <p *ngIf="flight.type == 'Compartilhado'" class="my-1">
+                {{
+                  flight.type == "Exclusivo"
+                    ? (flight.totalValue | currency : "BRL")
+                    : (flight.pricePerSeat | currency : "BRL")
+                }}
+                por assento
+              </p>
+            </article>
+          </div>
+          <div class="w-full my-2 border border-dashed"></div>
+          <div class="flex items-center justify-between">
+            <article>
+              <p>{{ flight.departureDate.split(" ")[0] }}</p>
+              <p>Data</p>
+            </article>
+            <article>
+              <p>{{ flight.durationText }}</p>
+              <p>Duração</p>
+            </article>
+            <article class="text-center">
+              <p>{{ flight.departureTime }}</p>
+              <p>Hora de partida</p>
+            </article>
+            <article class="text-center">
+              <p>{{ flight.numberOfSeats - flight.purchasedSeats }}</p>
+              <p>Assentos disponíveis</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #noData>
+  <h3 class="mx-auto text-4xl text-orange my-10 text-center font-medium">
+    Nenhum voo encontrado!
+  </h3>
+</ng-template>

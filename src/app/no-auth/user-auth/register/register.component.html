@@ -1,0 +1,434 @@
+<section class="w-2/4 mx-auto mt-28 pb-20">
+  <div class="grid grid-cols-2 gap-x-5" *ngIf="step == 1">
+    <article
+      (click)="register('user')"
+      class="box flex flex-col hover:border hover:border-solid hover:border-orange transition-all items-center justify-center p-4 rounded-lg cursor-pointer"
+    >
+      <img
+        width="250"
+        height="200"
+        ngSrc="assets/svg/user-auth.svg"
+        alt=""
+      />
+      <h3 class="text-2xl font-extrabold py-5">Quero ser passageiro</h3>
+    </article>
+    <article
+      (click)="register('company')"
+      class="box flex flex-col hover:border hover:border-solid hover:border-orange transition-all items-center justify-center p-4 rounded-lg cursor-pointer"
+    >
+      <img
+        width="250"
+        height="200"
+        ngSrc="assets/svg/company-auth.svg"
+        alt=""
+      />
+      <h3 class="text-2xl font-extrabold py-5">Quero ser parceiro</h3>
+    </article>
+  </div>
+
+  <section class="w-full mx-auto mt-28" *ngIf="step == 2">
+    <input
+      type="file"
+      class="hidden"
+      accept="image/*"
+      #fileUpload
+      (change)="uploadFile($event)"
+    />
+    <div *ngIf="type == 'company'">
+      <!--<h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Logo da empresa</h2>-->
+      <div
+        (click)="fileUpload.click()"
+        class="w-44 h-44 overflow-hidden border-orange border border-solid cursor-pointer flex items-center justify-center bg-gray-300 rounded-full mx-auto mb-10"
+      >
+        <mat-icon *ngIf="!filePath">add</mat-icon>
+        <img
+          *ngIf="filePath"
+          class="h-full w-full object-cover"
+          [src]="filePath"
+          alt="Logo da empresa"
+        />
+      </div>
+      <p class="text-center text-red-600 text-xs -mt-8" *ngIf="!filePath">
+        Logo da empresa
+      </p>
+    </div>
+    <form
+      class="w-full"
+      *ngIf="type == 'company'"
+      (submit)="submitCompany()"
+      [formGroup]="companyForm"
+    >
+      <div class="w-full">
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Dados pessoais</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Razão Social</mat-label>
+            <input type="text" matInput formControlName="name" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome do Gestor</mat-label>
+            <input type="text" matInput formControlName="managerName" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>CPF do Gestor</mat-label>
+            <input
+              type="text"
+              matInput
+              mask="000.000.000-00"
+              formControlName="managerDocument"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email da empresa</mat-label>
+            <input type="text" matInput formControlName="email" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Dados da empresa</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Número do COA</mat-label>
+            <input type="text" matInput formControlName="coa" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>CNPJ</mat-label>
+            <input
+              type="text"
+              matInput
+              mask="00.000.000/0000-00"
+              formControlName="document"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telefone comercial</mat-label>
+            <input
+              type="text"
+              matInput
+              mask="(00) 0 0000-0000 || (00) 0000-0000"
+              formControlName="commercialPhone"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telefone celular</mat-label>
+            <input
+              type="text"
+              matInput
+              mask="(00) 0 0000-0000 || (00) 0000-0000"
+              formControlName="cellPhone"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telefone de plantão</mat-label>
+            <input
+              type="text"
+              matInput
+              mask="(00) 0 0000-0000 || (00) 0000-0000"
+              formControlName="phoneOnCall"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-checkbox formControlName="acceptWhatsappMessages">Eu aceito receber mensagens via Whatsapp</mat-checkbox>
+
+          <div>
+            <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Documentos</h2>
+            <article class="mb-3">
+              <p class="font-medium">Documentos necessário para a aprovação do cadastro</p>
+              <ul class="list-disc list-inside">
+                <li>Especificações Operativas</li>
+                <!--<li>Contrato social</li>-->
+                <li>Documento de identificação do Gestor Responsável</li>
+              </ul>
+            </article>
+            <input
+              type="file"
+              class="hidden"
+              accept="image/*, application/pdf"
+              #fileUploadDocuments
+              (change)="uploadDocuments($event)"
+            />
+            <div
+              (click)="fileUploadDocuments.click()"
+              class="w-14 h-14 overflow-hidden border-orange border border-solid cursor-pointer flex items-center justify-center bg-gray-300 rounded-md mb-10"
+            >
+              <mat-icon>add</mat-icon>
+            </div>
+          </div>
+          <div class="my-5 grid grid-cols-2 items-center" *ngIf="documents.controls.length">
+            <div *ngFor="let image of documents.value; let i = index">
+              <img
+                *ngIf="!image.image.includes('pdf')"
+                class="h-full w-full object-cover"
+                [src]="image.image"
+                alt=""
+              />
+              <a
+                [href]="image.image"
+                target="_blank"
+                *ngIf="image.image.includes('pdf')"
+                class="text-orange font-medium hover:underline"
+              >
+                Visualizar documento {{ i + 1 }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full">
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Endereço</h2>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>CEP</mat-label>
+            <input
+              type="text"
+              mask="00000-000"
+              [dropSpecialCharacters]="false"
+              matInput
+              formControlName="zipCode"
+              (blur)="getCepInfos($event)"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Endereço</mat-label>
+            <input type="text" matInput formControlName="street" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Número</mat-label>
+            <input type="text" mask="0*" matInput formControlName="number" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Complemento</mat-label>
+            <input type="text" matInput formControlName="complement" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Cidade</mat-label>
+            <input type="text" matInput formControlName="city" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>UF</mat-label>
+            <input type="text" matInput formControlName="state" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>País</mat-label>
+            <input type="text" matInput formControlName="country" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Senha</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Confirmar Senha</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="confirmPassword"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <button
+            [disabled]="companyForm.invalid"
+            class="btn bg-mb-black-200 text-white rounded-lg font-bold py-4 w-full mt-3"
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <form
+      class="w-full"
+      *ngIf="type !== 'company'"
+      (submit)="submitUser()"
+      [formGroup]="userForm"
+    >
+      <div class="w-full">
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Dados pessoais</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome completo</mat-label>
+            <input type="text" formControlName="name" matInput />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telefone</mat-label>
+            <input
+              type="text"
+              mask="(00) 0 0000-0000"
+              matInput
+              formControlName="phone"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>WhatsApp</mat-label>
+            <input
+              type="text"
+              mask="(00) 0 0000-0000"
+              matInput
+              formControlName="whatsapp"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Senha</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Confirmar Senha</mat-label>
+            <input
+              matInput
+              formControlName="confirmPassword"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="w-full">
+        <h2 class="text-2xl font-extrabold mt-5 mb-2 text-orange">Endereço</h2>
+        <div class="space-y-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>CEP</mat-label>
+            <input
+              type="text"
+              mask="00000-000"
+              [dropSpecialCharacters]="false"
+              matInput
+              formControlName="zipCode"
+              (blur)="getCepInfos($event)"
+            />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Endereço</mat-label>
+            <input type="text" matInput formControlName="street" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Número</mat-label>
+            <input type="text" mask="0*" matInput formControlName="number" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Complemento</mat-label>
+            <input type="text" matInput formControlName="complement" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Cidade</mat-label>
+            <input type="text" matInput formControlName="city" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>UF</mat-label>
+            <input type="text" matInput formControlName="state" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>País</mat-label>
+            <input type="text" matInput formControlName="country" />
+            <mat-error class="text-xs">Campo obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button
+        [disabled]="userForm.invalid"
+        class="btn bg-mb-black-200 text-white rounded-lg font-bold py-4 w-full mt-3"
+      >
+        Salvar
+      </button>
+    </form>
+  </section>
+</section>

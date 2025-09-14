@@ -1,0 +1,139 @@
+<section class="pb-10">
+  <img
+    class="w-full object-cover h-96"
+    [src]="solicitation?.aircraft.image"
+    alt=""
+  />
+
+  <div class="w-11/12 mx-auto">
+    <div class="my-10 flex items-center justify-between">
+      <h2 class="text-3xl font-semibold">Detalhes do voo</h2>
+      <button
+        *ngIf="
+          solicitation?.paymentUrl &&
+          solicitation?.status === 'Aguardando cliente'
+        "
+        (click)="openPaymentPage(solicitation.paymentUrl)"
+        class="bg-blue-400 text-white rounded-lg font-bold py-4 w-48 mt-3"
+      >
+        Realizar pagamento
+      </button>
+    </div>
+
+    <h4 class="text-2xl font-bold text-orange mb-5">
+      Assentos reservados : {{ solicitation?.aircraft.numberOfSeats }}
+    </h4>
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <h4 class="text-2xl font-bold text-orange mb-5">Itinerário do voo</h4>
+        <div class="font-medium text-lg flex gap-x-2 mb-5">
+          <img ngSrc="assets/svg/calendar.svg" height="20" width="20" />
+          <p>
+            {{ solicitation?.date }}, às
+            {{ solicitation?.departureTime }}
+          </p>
+        </div>
+        <div class="flex items-start">
+          <img ngSrc="assets/svg/timeline.svg" height="80" width="80" />
+          <div>
+            <article class="mb-8">
+              <p class="font-bold text-lg text-orange">
+                {{ solicitation?.departureTime }}
+              </p>
+              <p class="font-bold">
+                {{ solicitation?.departureAirport.iata }},
+                {{ solicitation?.departureAirport.icao }}
+              </p>
+              <p>
+                {{ solicitation?.departureAirport.name }} -
+                {{ solicitation?.departureAirport.city }}
+              </p>
+            </article>
+            <article>
+              <p class="font-bold text-lg text-orange">
+                {{ solicitation?.arrivalTime }}
+              </p>
+              <p class="font-bold">
+                {{ solicitation?.arrivalAirport.iata }},
+                {{ solicitation?.arrivalAirport.icao }}
+              </p>
+              <p>
+                {{ solicitation?.arrivalAirport.name }} -
+                {{ solicitation?.arrivalAirport.city }}
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-2xl font-bold text-orange mb-5">
+          Detalhes da aeronave
+        </h4>
+        <div class="flex items-center gap-3 text-lg font-medium">
+          <img ngSrc="assets/svg/nav-orange.svg" height="80" width="50" />
+          <div>
+            <p class="font-bold text-orange">
+              {{ solicitation?.aircraft.model }}
+            </p>
+            <p>
+              {{ solicitation?.aircraft.manufacturer }} -
+              {{ solicitation?.aircraft.numberOfSeats }} assentos
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2">
+        <h4 class="text-2xl font-bold text-orange">Informações secundárias</h4>
+
+        <div class="flex gap-x-4">
+          <div class="flex items-start gap-x-4">
+            <img ngSrc="assets/svg/embarque.svg" height="80" width="50" />
+            <article>
+              <h5 class="text-lg font-bold text-mb-black-200">
+                Instruções de embarque
+              </h5>
+              <p>
+                {{ solicitation?.departureAirport.name }}, 
+                {{ solicitation?.departureAirport.city }},
+                {{ solicitation?.departureAirport.country }}
+              </p>
+              <p *ngIf="solicitation?.departureAirport.instructions" class="mt-2">
+                {{ solicitation?.departureAirport.instructions }}
+              </p>
+              <button
+                *ngIf="solicitation?.departureAirport.departureLink"
+                (click)="openLocationInNewTab(solicitation?.departureAirport.departureLink)"
+                class="bg-mb-black-200 text-white rounded-lg font-bold py-4 w-48 mt-3"
+              >
+               Localização
+              </button>
+            </article>
+          </div>
+          <div class="flex items-start gap-x-4">
+            <img ngSrc="assets/svg/desembarque.svg" height="80" width="50" />
+            <article>
+              <h5 class="text-lg font-bold text-mb-black-200">
+                Instruções de desembarque
+              </h5>
+              <p>
+                {{ solicitation?.arrivalAirport.name }},
+                {{ solicitation?.arrivalAirport.city }},
+                {{ solicitation?.arrivalAirport.country }}
+              </p>
+              <p *ngIf="solicitation?.arrivalAirport.instructions" class="mt-2">
+                {{ solicitation?.arrivalAirport.instructions }}
+              </p>
+              <button
+                *ngIf="solicitation?.arrivalAirport.arrivalLink"
+                (click)="openLocationInNewTab(solicitation?.arrivalAirport.arrivalLink)"
+                class="bg-mb-black-200 text-white rounded-lg font-bold py-4 w-48 mt-3"
+              >
+                Localização
+              </button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

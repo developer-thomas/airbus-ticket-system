@@ -1,0 +1,19 @@
+<mat-form-field class="no-padding w-full" appearance="outline">
+  <mat-label>{{ title }}</mat-label>
+  <input
+    type="text"
+    placeholder="Selecione a cidade"
+    matInput
+    [formControl]="cityControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    (optionSelected)="selectCity($event)"
+  >
+    <mat-option *ngFor="let city of cityOptions | async" [value]="city.city">
+      {{ city.city }} - {{ city.shortCountry }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
